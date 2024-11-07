@@ -17,25 +17,27 @@ app.get('/hello-world', (req, res) => {
       username: "Khem (from auth middleware)",
       timestamp: new Date().toISOString()
     }, 'Received request');
-    /* Start end */
-
+    /* End log */
+  
     const { query } = req;
-
     if (query.animal === 'cat') {
       throw { message: "Cats are banned" };
     }
 
-    
     /* Start log */
     logger.info({
       username: "Khem (from auth middleware)",
       timestamp: new Date().toISOString()
     }, 'Response success!');
-    /* Start end */
+    /* End log */
 
     res.status(200).send("success!");
   } catch (err) {
+  
+    /* Start log */
     logger.customError(req, err);
+    /* End log */
+
     res.status(400).send({
       status: "failure",
       message: err.message
